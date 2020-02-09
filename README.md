@@ -20,7 +20,7 @@ https://users.dcc.uchile.cl/~peortega/ae/
 
 
 ### Software
-## PyQt and LSL App
+#### PyQt and LSL App
 https://github.com/labstreaminglayer/App-SigVisualizer
 
 
