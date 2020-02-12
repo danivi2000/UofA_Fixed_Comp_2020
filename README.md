@@ -4,15 +4,19 @@ EEG, Body Tracking, Eye Tracking
 
 ##  Starting Links
 ### Hardware
-#### Acquisition
+#### Acquisition Main
 ##### HackEEG
 https://github.com/adamfeuer/hackeeg-shield/tree/master/docs
-##### Hackaday
-https://hackaday.io/project/13285/logs?sort=oldest
+##### OpenBCI
+https://github.com/OpenBCI/Documentation
 ##### PolyCortex
 https://github.com/PolyCortex/AcquisitionEEG
+
+##### Extras
 ##### MINT
 https://github.com/UBCMint/MINT_FixedChallenge_2019
+##### Hackaday
+https://hackaday.io/project/13285/logs?sort=oldest
 
 
 #### Electrodes
