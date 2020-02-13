@@ -8,11 +8,11 @@ EEG, Body Tracking, Eye Tracking
 ##### HackEEG
 https://github.com/adamfeuer/hackeeg-shield/tree/master/docs
 ##### OpenBCI
-https://github.com/OpenBCI/Documentation
+https://github.com/OpenBCI/V3_Hardware_Design_Files
 ##### PolyCortex
 https://github.com/PolyCortex/AcquisitionEEG
 
-##### Extras
+#### Extras
 ##### MINT
 https://github.com/UBCMint/MINT_FixedChallenge_2019
 ##### Hackaday
