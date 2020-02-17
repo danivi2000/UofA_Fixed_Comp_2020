@@ -23,8 +23,11 @@ https://hackaday.io/project/13285/logs?sort=oldest
 https://users.dcc.uchile.cl/~peortega/ae/
 
 
-### Software
+### Acquisition + UI
 #### PyQt and LSL App
 https://github.com/labstreaminglayer/App-SigVisualizer
 
+### Body Tracking
+#### Arducam
+https://github.com/ArduCAM
 
