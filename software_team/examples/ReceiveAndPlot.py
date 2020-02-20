@@ -13,6 +13,7 @@ import numpy as np
 import math
 import pylsl
 import pyqtgraph as pg
+import sys
 from pyqtgraph.Qt import QtCore, QtGui
 from typing import List
 
@@ -163,8 +164,6 @@ def main():
     pull_timer = QtCore.QTimer()
     pull_timer.timeout.connect(update)
     pull_timer.start(pull_interval)
-
-    import sys
 
     # Start Qt event loop unless running in interactive mode or using pyside.
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
