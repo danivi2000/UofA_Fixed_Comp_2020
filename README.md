@@ -2,32 +2,31 @@
 EEG, Body Tracking, Eye Tracking
 
 
-##  Starting Links
-### Hardware
-#### Acquisition Main
-##### HackEEG
+## Hardware
+### Acquisition Main
+#### HackEEG
 https://github.com/adamfeuer/hackeeg-shield/tree/master/docs
-##### OpenBCI
+#### OpenBCI
 https://github.com/OpenBCI/V3_Hardware_Design_Files
-##### PolyCortex
+#### PolyCortex
 https://github.com/PolyCortex/AcquisitionEEG
-
-#### Extras
-##### MINT
-https://github.com/UBCMint/MINT_FixedChallenge_2019
-##### Hackaday
-https://hackaday.io/project/13285/logs?sort=oldest
-
-
 #### Electrodes
 https://users.dcc.uchile.cl/~peortega/ae/
 
 
-### Acquisition + UI
-#### PyQt and LSL App
+## Data Acquisition and UI
+### PyQt and LSL App
 https://github.com/labstreaminglayer/App-SigVisualizer
 
-### Body Tracking
-#### Arducam
+
+## Body Tracking
+### Arducam
 https://github.com/ArduCAM
+
+
+### Extras
+#### MINT
+https://github.com/UBCMint/MINT_FixedChallenge_2019
+#### Hackaday
+https://hackaday.io/project/13285/logs?sort=oldest
 
