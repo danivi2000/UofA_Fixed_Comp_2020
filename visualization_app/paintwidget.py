@@ -171,13 +171,7 @@ class PaintWidget(QWidget):
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        colors = []
-        colors.append(Qt.green)
-        colors.append(Qt.red)
-        colors.append(Qt.blue)
-        colors.append(Qt.white)
-        colors.append(Qt.yellow)
-        colors.append(Qt.magenta)
+        colors = [Qt.green, Qt.red, Qt.blue, Qt.white, Qt.yellow, Qt.magenta]
         if self.dataBuffer is not None:
 
             n_samps = len(self.dataBuffer)
