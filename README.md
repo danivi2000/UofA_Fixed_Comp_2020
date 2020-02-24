@@ -10,9 +10,7 @@ https://github.com/adamfeuer/hackeeg-shield/tree/master/docs
 https://github.com/OpenBCI/V3_Hardware_Design_Files
 #### PolyCortex
 https://github.com/PolyCortex/AcquisitionEEG
-
-
-### Electrodes
+#### Electrodes
 https://users.dcc.uchile.cl/~peortega/ae/
 
 
