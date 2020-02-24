@@ -6,7 +6,7 @@ import math
 import copy
 
 
-CHANNEL_Y_FILL = 0.7  # How much of the per-channel vertical space is filled.  > 1 will overlap the lines.
+CHANNEL_Y_FILL = 0.25  # How much of the per-channel vertical space is filled.  > 1 will overlap the lines.
 
 
 class DataThread(QThread):
@@ -103,7 +103,7 @@ class PaintWidget(QWidget):
     def __init__(self, widget):
         super().__init__()
         # I ADDED THIS IN FOR RESIZING SUPER SKETCHY LMAO
-        widget.resize(800, 600)
+        widget.resize(1000, 600)
 
         self.reset()
         pal = QPalette()
