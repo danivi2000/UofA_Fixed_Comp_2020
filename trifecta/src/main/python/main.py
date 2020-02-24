@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+from ui_sigvisualizer import Visualizer
 
 
 class Ui_MainWindow(object):
@@ -100,7 +101,11 @@ class Ui_MainWindow(object):
         self.visualize_scr.clicked.connect(self.goto_visualize_scr)
 
     def goto_visualize_scr(self):
-        MainWindow.hide()
+        # MainWindow.hide()
+        self.Form = QtWidgets.QWidget()
+        self.ui = Visualizer()
+        self.ui.setupUi(self.Form)
+        self.Form.show()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
