@@ -30,3 +30,6 @@ https://github.com/UBCMint/MINT_FixedChallenge_2019
 #### Hackaday
 https://hackaday.io/project/13285/logs?sort=oldest
 
+
+## License
+This repository is licensed under the MIT license. See [LICENSE](./LICENSE) for further detail.
