@@ -6,7 +6,7 @@ import math
 import copy
 
 
-CHANNEL_Y_FILL = 0.7  # How much of the per-channel vertical space is filled.  > 1 will overlap the lines.
+CHANNEL_Y_FILL = 0.25  # How much of the per-channel vertical space is filled.  > 1 will overlap the lines.
 
 
 class DataThread(QThread):
@@ -33,6 +33,7 @@ class DataThread(QThread):
 
     def update_streams(self):
         if not self.streams:
+            print("what the fuck???")
             self.streams = pylsl.resolve_streams(wait_time=1.0)
             for k, stream in enumerate(self.streams):
                 n = stream.name()
@@ -101,9 +102,12 @@ class PaintWidget(QWidget):
 
     def __init__(self, widget):
         super().__init__()
+        # I ADDED THIS IN FOR RESIZING SUPER SKETCHY LMAO
+        # widget.resize(1000, 600)
+
         self.reset()
         pal = QPalette()
-        pal.setColor(QPalette.Background, Qt.white)
+        pal.setColor(QPalette.Background, Qt.black)
         self.setAutoFillBackground(True)
         self.setPalette(pal)
 
@@ -170,8 +174,8 @@ class PaintWidget(QWidget):
 
     def paintEvent(self, event):
         painter = QPainter(self)
+        colors = [Qt.green, Qt.red, Qt.blue, Qt.white, Qt.yellow, Qt.magenta]
         if self.dataBuffer is not None:
-            painter.setPen(QPen(Qt.blue))
 
             n_samps = len(self.dataBuffer)
             n_chans = len(self.dataBuffer[0])
@@ -207,6 +211,7 @@ class PaintWidget(QWidget):
             px_per_chunk = self.width() / self.dataTr.chunksPerScreen
             x0 = self.chunk_idx * px_per_chunk
             for ch_idx in range(n_chans):
+                painter.setPen(QPen(colors[ch_idx % 6]))
                 chan_offset = (ch_idx + 0.5) * self.channelHeight
                 if self.lastY:
                     if not math.isnan(self.lastY[ch_idx]) and not math.isnan(self.dataBuffer[0][ch_idx]):
