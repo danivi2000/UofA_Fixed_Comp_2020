@@ -93,8 +93,11 @@ class Ui_sigvisualizer(object):
             self.treeWidget.addTopLevelItem(item)
 
         self.treeWidget.setAnimated(True)
-        self.statusbar.showMessage(
-            "Sampling rate: {}Hz".format(metadata[default_idx]["srate"]))
+        try:
+            self.statusbar.showMessage(
+                "Sampling rate: {}Hz".format(metadata[default_idx]["srate"]))
+        except IndexError:
+            pass
 
     def toggle_panel(self):
         if self.panelHidden:
