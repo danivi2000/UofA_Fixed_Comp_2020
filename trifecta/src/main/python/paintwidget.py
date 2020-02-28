@@ -209,7 +209,7 @@ class PaintWidget(QWidget):
             px_per_chunk = self.width() / self.dataTr.chunksPerScreen
             x0 = self.chunk_idx * px_per_chunk
             for ch_idx in range(n_chans):
-                painter.setPen(QPen(colors[ch_idx % 6]))
+                painter.setPen(QPen(colors[ch_idx % len(colors)]))
                 chan_offset = (ch_idx + 0.5) * self.channelHeight
                 if self.lastY:
                     if not math.isnan(self.lastY[ch_idx]) and not math.isnan(self.dataBuffer[0][ch_idx]):
