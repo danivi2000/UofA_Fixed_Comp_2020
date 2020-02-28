@@ -26,6 +26,7 @@ class DataThread(QThread):
         self.stream_params = []
         self.sig_strm_idx = -1
 
+    # no functionality yet
     def handle_stream_expanded(self, name):
         stream_names = [_['metadata']['name'] for _ in self.stream_params]
         self.sig_strm_idx = stream_names.index(name)
@@ -33,7 +34,6 @@ class DataThread(QThread):
 
     def update_streams(self):
         if not self.streams:
-            print("what the fuck???")
             self.streams = pylsl.resolve_streams(wait_time=1.0)
             for k, stream in enumerate(self.streams):
                 n = stream.name()
@@ -102,8 +102,6 @@ class PaintWidget(QWidget):
 
     def __init__(self, widget):
         super().__init__()
-        # I ADDED THIS IN FOR RESIZING SUPER SKETCHY LMAO
-        # widget.resize(1000, 600)
 
         self.reset()
         pal = QPalette()

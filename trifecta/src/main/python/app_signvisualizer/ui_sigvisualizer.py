@@ -8,23 +8,21 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from paintwidget import PaintWidget
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import QSize, Qt, pyqtSignal
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QStatusBar,
-                             QTreeWidgetItem)
 
-class Ui_MainWindow(object):
-    stream_expanded = pyqtSignal(str)
+
+class Ui_sigvisualizer(object):
+    stream_expanded = QtCore.pyqtSignal(str)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1123, 759)
+        MainWindow.resize(1200, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
         self.toggleButton = QtWidgets.QPushButton(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
+            QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.toggleButton.sizePolicy().hasHeightForWidth())
@@ -58,8 +56,8 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.toggleButton.setIcon(QIcon("icons/chevron_left.svg"))
-        self.toggleButton.setIconSize(QSize(30, 30))
+        self.toggleButton.setIcon(QtGui.QIcon("icons/chevron_left.svg"))
+        self.toggleButton.setIconSize(QtCore.QSize(30, 30))
         self.toggleButton.clicked.connect(self.toggle_panel)
         self.updateButton.clicked.connect(
             self.widget.dataTr.update_streams)
@@ -67,6 +65,7 @@ class Ui_MainWindow(object):
             self.update_metadata_widget)
         self.panelHidden = False
 
+        self.treeWidget.setHeaderLabel('Streams')
         self.treeWidget.itemExpanded.connect(self.tree_item_expanded)
 
 
@@ -82,13 +81,13 @@ class Ui_MainWindow(object):
 
     def update_metadata_widget(self, metadata, default_idx):
         for s_ix, s_meta in enumerate(metadata):
-            item = QTreeWidgetItem(self.treeWidget)
+            item = QtWidgets.QTreeWidgetItem(self.treeWidget)
             item.setText(0, s_meta["name"])
 
             for m in range(s_meta["ch_count"]):
-                channel_item = QTreeWidgetItem(item)
+                channel_item = QtWidgets.QTreeWidgetItem(item)
                 channel_item.setText(0, 'Channel {}'.format(m+1))
-                channel_item.setCheckState(0, Qt.Checked)
+                channel_item.setCheckState(0, QtCore.Qt.Checked)
 
             item.setExpanded(True if s_ix == default_idx else False)
             self.treeWidget.addTopLevelItem(item)
@@ -102,14 +101,14 @@ class Ui_MainWindow(object):
             self.panelHidden = False
             self.treeWidget.show()
             self.updateButton.show()
-            self.toggleButton.setIcon(QIcon("icons/chevron_left.svg"))
-            self.toggleButton.setIconSize(QSize(30, 30))
+            self.toggleButton.setIcon(QtGui.QIcon("icons/chevron_left.svg"))
+            self.toggleButton.setIconSize(QtCore.QSize(30, 30))
         else:
             self.panelHidden = True
             self.treeWidget.hide()
             self.updateButton.hide()
-            self.toggleButton.setIcon(QIcon("icons/chevron_right.svg"))
-            self.toggleButton.setIconSize(QSize(30, 30))
+            self.toggleButton.setIcon(QtGui.QIcon("icons/chevron_right.svg"))
+            self.toggleButton.setIconSize(QtCore.QSize(30, 30))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -121,8 +120,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_sigvisualizer()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
