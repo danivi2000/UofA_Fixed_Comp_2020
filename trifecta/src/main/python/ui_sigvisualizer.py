@@ -20,6 +20,7 @@ class Ui_sigvisualizer(object):
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
+
         self.toggleButton = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
             QtWidgets.QSizePolicy.Expanding)
@@ -31,8 +32,10 @@ class Ui_sigvisualizer(object):
         self.toggleButton.setText("")
         self.toggleButton.setObjectName("toggleButton")
         self.gridLayout.addWidget(self.toggleButton, 0, 0, 2, 1)
+
         self.treeWidget = QtWidgets.QTreeWidget(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
+            QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.treeWidget.sizePolicy().hasHeightForWidth())
@@ -41,6 +44,7 @@ class Ui_sigvisualizer(object):
         self.treeWidget.setObjectName("treeWidget")
         self.treeWidget.headerItem().setText(0, "1")
         self.gridLayout.addWidget(self.treeWidget, 0, 1, 1, 1)
+
         self.widget = PaintWidget(self.centralwidget)
         self.widget.setObjectName("widget")
         self.gridLayout.addWidget(self.widget, 0, 2, 2, 1)
@@ -48,10 +52,12 @@ class Ui_sigvisualizer(object):
         self.updateButton.setObjectName("updateButton")
         self.gridLayout.addWidget(self.updateButton, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
+
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1123, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
+
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
