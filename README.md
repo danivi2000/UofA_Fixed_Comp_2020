@@ -2,7 +2,7 @@
 EEG, Body Tracking, Eye Tracking
 
 
-## Hardware
+## Hardware 
 ### Acquisition Main
 #### HackEEG
 https://github.com/adamfeuer/hackeeg-shield/tree/master/docs
@@ -13,9 +13,13 @@ https://github.com/PolyCortex/AcquisitionEEG
 #### Merlin
 https://github.com/merlin-neurotech/Hardware-Team
 
+### PCB + Circuit Design
+https://www.instructables.com/id/PCB-Creation-with-Eagle-for-Beginners/
+
 ### Other
 #### Electrodes
 https://users.dcc.uchile.cl/~peortega/ae/
+
 
 
 ## Data Acquisition and UI
