@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
+import math
 
 def render_line(*verticies):
     glBegin(GL_LINES)
@@ -14,6 +15,21 @@ def render_line(*verticies):
 
     glEnd()
 
+def render_sphere(vertex:tuple, radius:float, slices:int, stack:int):
+    for i in range(slices + 1):
+        angle_i = i * math.tau / slices
+        s = []
+        for j in range(stack + 1):
+            angle_j = j * math.pi / stack
+            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius, vertex[1] + math.cos(angle_i) * math.sin(angle_j) * radius, vertex[2] + math.cos(angle_j) * radius))
+        render_line(*s)
+    for j in range(stack + 1):
+        angle_j = j * math.pi / stack
+        s = []
+        for i in range(slices + 1):
+            angle_i = i * math.tau / slices
+            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius, vertex[1] + math.cos(angle_i) * math.sin(angle_j) * radius, vertex[2] + math.cos(angle_j) * radius))
+        render_line(*s)
 
 def render_axis():
     glColor3b(90, 90, 90)
@@ -25,6 +41,7 @@ def render_body(head:tuple, neck:tuple, left_shoudler:tuple, left_elbow:tuple, l
     glColor3b(0, 100, 0)
     # torso
     render_line(head, neck)
+    render_sphere(head, 0.5, 8, 8)
     # left
     render_line(neck, left_shoudler, left_elbow, left_hand)
     # right
