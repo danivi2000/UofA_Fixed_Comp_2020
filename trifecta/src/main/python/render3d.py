@@ -14,7 +14,15 @@ def render_line(*verticies):
 
     glEnd()
 
+
+def render_axis():
+    glColor3b(90, 90, 90)
+    render_line((0, 0, 0), (5, 0, 0))
+    render_line((0, 0, 0), (0, 5, 0))
+    render_line((0, 0, 0), (0, 0, 5))
+
 def render_body(head:tuple, neck:tuple, left_shoudler:tuple, left_elbow:tuple, left_hand:tuple, right_shoudler:tuple, right_elbow:tuple, right_hand:tuple):
+    glColor3b(0, 100, 0)
     # torso
     render_line(head, neck)
     # left
@@ -23,12 +31,16 @@ def render_body(head:tuple, neck:tuple, left_shoudler:tuple, left_elbow:tuple, l
     render_line(neck, right_shoudler, right_elbow, right_hand)
 
 def rotate_screen(mouse_info, fps):
-    mouse1 = mouse_info.get_pressed()[0]
+    mouse1, mouse3, mouse2 = mouse_info.get_pressed()
     delta_x, delta_y = mouse_info.get_rel()
-    c = 10
+    r = 10
+    t = 0.4
     if (mouse1):
-        glRotate(delta_x / fps * c, 0, 1, 0)
-        glRotate(delta_y / fps * c, 1, 0, 0)
+        glRotate(delta_x / fps * r, 0, 1, 0)
+        glRotate(delta_y / fps * r, 1, 0, 0)
+    if (mouse2):
+        glTranslate(delta_x / fps * t, 0, 0)
+        glTranslate(0, -delta_y / fps * t, 0)
 
 def main():
     pygame.init()
@@ -36,8 +48,9 @@ def main():
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
     clock = pygame.time.Clock()
     gluPerspective(45, display[0]/display[1], 0.1, 50.0)
-    glTranslate(0.0, 0.0, -5);
-    glRotate(0, 0, 0, 0)
+    glTranslate(0, 0, -5);
+    glRotate(45, 0, 1, 0)
+    glRotate(45, 1, 0, 0)
 
     while True:
         for event in pygame.event.get():
@@ -47,6 +60,7 @@ def main():
         clock.tick()
         rotate_screen(pygame.mouse, clock.get_fps())
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+        render_axis()
         render_body((0, 1, 0), (0, 0, 0), (1, 0, 0), (1.5, -1, 0), (1, -2, 0), (-1, 0, 0), (-1.5, -1, 0), (-1, -2, 0))
         pygame.display.flip()
         pygame.time.wait(10)
