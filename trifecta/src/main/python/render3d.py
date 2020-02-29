@@ -21,14 +21,14 @@ def render_sphere(vertex:tuple, radius:float, slices:int, stack:int):
         s = []
         for j in range(stack + 1):
             angle_j = j * math.pi / stack
-            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius, vertex[1] + math.cos(angle_i) * math.sin(angle_j) * radius, vertex[2] + math.cos(angle_j) * radius))
+            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius, vertex[1] + math.cos(angle_j) * radius, vertex[2] + math.cos(angle_i) * math.sin(angle_j) * radius))
         render_line(*s)
     for j in range(stack + 1):
         angle_j = j * math.pi / stack
         s = []
         for i in range(slices + 1):
             angle_i = i * math.tau / slices
-            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius, vertex[1] + math.cos(angle_i) * math.sin(angle_j) * radius, vertex[2] + math.cos(angle_j) * radius))
+            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius, vertex[1] + math.cos(angle_j) * radius, vertex[2] + math.cos(angle_i) * math.sin(angle_j) * radius))
         render_line(*s)
 
 def render_axis():
