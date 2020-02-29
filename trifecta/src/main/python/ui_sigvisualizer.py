@@ -103,7 +103,27 @@ class Ui_sigvisualizer(object):
             self.statusbar.showMessage(
                 "Sampling rate: {}Hz".format(metadata[default_idx]["srate"]))
         except IndexError:
-            pass
+            self.show_popup_msg()
+
+    def show_popup_msg(self):
+        no_data_msg = QtWidgets.QMessageBox()
+        no_data_msg.setWindowTitle('Error')
+        no_data_msg.setText('No channels detected.')
+
+        no_data_msg.setIcon(QtWidgets.QMessageBox.Critical)
+        no_data_msg.setDefaultButton(QtWidgets.QMessageBox.Ok)
+        no_data_msg.setStandardButtons(QtWidgets.QMessageBox.Ok
+            | QtWidgets.QMessageBox.Retry)
+        no_data_msg.setDetailedText('Ensure that EEG data is streaming over'
+            ' the correct network.')
+        no_data_msg.buttonClicked.connect(lambda button_name:
+            self.repeat_get_streams(button_name, no_data_msg))
+
+        no_data_msg.exec_()
+
+    def repeat_get_streams(self, button_type, popup_obj):
+        if button_type.text() == 'Retry':
+            self.widget.dataTr.update_streams()
 
     def toggle_panel(self):
         if self.panelHidden:

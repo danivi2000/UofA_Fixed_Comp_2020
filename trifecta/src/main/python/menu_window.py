@@ -48,34 +48,30 @@ class MenuWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
 
-        self.eeg_box = QtWidgets.QCheckBox(self.centralwidget)
+        self.eeg_box = QtWidgets.QPushButton(self.centralwidget)
+        self.eeg_box.setCheckable(True)
         self.eeg_box.setStyleSheet(
-        "QCheckBox {"
-        "    color: #C678DD;"
-        "    background-color: #282C34;"
-        "    margin-left: auto;"
-        "    margin-right: auto;"
+        "QPushButton {"
+        "    color: #FFFFFF;"
+        "    background-color: #C678DD;"
+        "    padding: 150px;"
         "}"
         "")
         self.eeg_box.setObjectName("eeg_box")
         self.horizontalLayout.addWidget(self.eeg_box)
 
-        self.environment_box = QtWidgets.QCheckBox(self.centralwidget)
+        self.environment_box = QtWidgets.QPushButton(self.centralwidget)
+        self.environment_box.setCheckable(True)
         self.environment_box.setStyleSheet(
-            "QCheckBox {"
-            "    color: #C678DD;"
-            "    background-color: #282C34;"
-            "    margin-left: auto;"
-            "    margin-right: auto;"
+            "QPushButton {"
+            "    color: #FFFFFF;"
+            "    background-color: #C678DD;"
+            "    padding: 150px;"
             "}"
             "")
         self.environment_box.setObjectName("environment_box")
         self.horizontalLayout.addWidget(self.environment_box)
         self.verticalLayout.addLayout(self.horizontalLayout)
-
-        spacerItem2 = QtWidgets.QSpacerItem(20, 150,
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem2)
 
         self.visualize_scr = QtWidgets.QPushButton(self.centralwidget)
         self.visualize_scr.setStyleSheet(
