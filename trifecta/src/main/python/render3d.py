@@ -4,6 +4,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 import math
 
+
 def render_line(*verticies):
     glBegin(GL_LINES)
 
@@ -15,21 +16,28 @@ def render_line(*verticies):
 
     glEnd()
 
+
 def render_sphere(vertex:tuple, radius:float, slices:int, stack:int):
     for i in range(slices + 1):
         angle_i = i * math.tau / slices
         s = []
         for j in range(stack + 1):
             angle_j = j * math.pi / stack
-            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius, vertex[1] + math.cos(angle_j) * radius, vertex[2] + math.cos(angle_i) * math.sin(angle_j) * radius))
+            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius,
+                    vertex[1] + math.cos(angle_j) * radius, vertex[2]
+                    + math.cos(angle_i) * math.sin(angle_j) * radius))
         render_line(*s)
+
     for j in range(stack + 1):
         angle_j = j * math.pi / stack
         s = []
         for i in range(slices + 1):
             angle_i = i * math.tau / slices
-            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius, vertex[1] + math.cos(angle_j) * radius, vertex[2] + math.cos(angle_i) * math.sin(angle_j) * radius))
+            s.append((vertex[0] + math.sin(angle_i) * math.sin(angle_j) * radius,
+                vertex[1] + math.cos(angle_j) * radius, vertex[2]
+                + math.cos(angle_i) * math.sin(angle_j) * radius))
         render_line(*s)
+
 
 def render_axis():
     glColor3b(90, 90, 90)
@@ -37,7 +45,12 @@ def render_axis():
     render_line((0, 0, 0), (0, 5, 0))
     render_line((0, 0, 0), (0, 0, 5))
 
-def render_body(head:tuple, neck:tuple, left_shoudler:tuple, left_elbow:tuple, left_hand:tuple, right_shoudler:tuple, right_elbow:tuple, right_hand:tuple):
+
+def render_body(
+    head:tuple, neck:tuple,
+    left_shoudler:tuple, left_elbow:tuple,left_hand:tuple,
+    right_shoudler:tuple, right_elbow:tuple, right_hand:tuple
+):
     glColor3b(0, 100, 0)
     # torso
     render_line(head, neck)
@@ -46,6 +59,7 @@ def render_body(head:tuple, neck:tuple, left_shoudler:tuple, left_elbow:tuple, l
     render_line(neck, left_shoudler, left_elbow, left_hand)
     # right
     render_line(neck, right_shoudler, right_elbow, right_hand)
+
 
 def rotate_screen(mouse_info, fps):
     mouse1, mouse3, mouse2 = mouse_info.get_pressed()
@@ -58,6 +72,7 @@ def rotate_screen(mouse_info, fps):
     if (mouse2):
         glTranslate(delta_x / fps * t, 0, 0)
         glTranslate(0, -delta_y / fps * t, 0)
+
 
 def main():
     pygame.init()
@@ -78,7 +93,11 @@ def main():
         rotate_screen(pygame.mouse, clock.get_fps())
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         render_axis()
-        render_body((0, 1, 0), (0, 0, 0), (1, 0, 0), (1.5, -1, 0), (1, -2, 0), (-1, 0, 0), (-1.5, -1, 0), (-1, -2, 0))
+        render_body(
+            (0, 1, 0), (0, 0, 0),
+            (1, 0, 0), (1.5, -1, 0), (1, -2, 0),
+            (-1, 0, 0), (-1.5, -1, 0), (-1, -2, 0)
+        )
         pygame.display.flip()
         pygame.time.wait(10)
 
