@@ -73,8 +73,6 @@ class Ui_sigvisualizer(object):
 
         self.treeWidget.setHeaderLabel('Streams')
         self.treeWidget.itemExpanded.connect(self.tree_item_expanded)
-
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -94,6 +92,7 @@ class Ui_sigvisualizer(object):
                 channel_item = QtWidgets.QTreeWidgetItem(item)
                 channel_item.setText(0, 'Channel {}'.format(m+1))
                 channel_item.setCheckState(0, QtCore.Qt.Checked)
+            self.treeWidget.itemClicked.connect(self.yolo)
 
             item.setExpanded(True if s_ix == default_idx else False)
             self.treeWidget.addTopLevelItem(item)
@@ -104,6 +103,13 @@ class Ui_sigvisualizer(object):
                 "Sampling rate: {}Hz".format(metadata[default_idx]["srate"]))
         except IndexError:
             self.show_popup_msg()
+    
+    def yolo(self,channel,column):
+        containingTree = channel.treeWidget()
+        # print(channel.checkState(column))
+        # print(containingTree.indexFromItem(channel,column).row())
+        # print()
+        self.widget.set_display(channel.checkState(column), containingTree.indexFromItem(channel,column).row())
 
     def show_popup_msg(self):
         no_data_msg = QtWidgets.QMessageBox()
