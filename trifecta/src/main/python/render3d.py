@@ -52,12 +52,14 @@ def rotate_screen(mouse_info, fps):
     delta_x, delta_y = mouse_info.get_rel()
     r = 10
     t = 0.4
-    if (mouse1):
+    if mouse1:
         glRotate(delta_x / fps * r, 0, 1, 0)
         glRotate(delta_y / fps * r, 1, 0, 0)
-    if (mouse2):
+    if mouse2:
         glTranslate(delta_x / fps * t, 0, 0)
         glTranslate(0, -delta_y / fps * t, 0)
+    if mouse3:
+        glTranslate(0, 0, delta_y * t)
 
 def main():
     pygame.init()
