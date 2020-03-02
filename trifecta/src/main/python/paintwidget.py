@@ -108,11 +108,17 @@ class PaintWidget(QWidget):
         pal.setColor(QPalette.Background, Qt.black)
         self.setAutoFillBackground(True)
         self.setPalette(pal)
-
         self.dataTr = DataThread(self)
         self.dataTr.sendData.connect(self.get_data)
         self.dataTr.changedStream.connect(self.reset)
+        self.unsetDisplay = True
 
+    def set_display(self,checked,index):
+        if checked == 2:
+            self.display[index] = True
+        else:
+            self.display[index] = False 
+            
     def reset(self):
         self.chunk_idx = 0
         self.channelHeight = 0
@@ -123,6 +129,7 @@ class PaintWidget(QWidget):
         self.scaling = []
         self.mean = []
         self.t0 = 0
+
 
     def get_data(self, sig_ts, sig_buffer, marker_ts, marker_buffer):
         update_x0 = float(self.width())
@@ -171,10 +178,12 @@ class PaintWidget(QWidget):
             self.update(int(update_x0), 0, int(update_width + 1), self.height())
 
     def paintEvent(self, event):
+        if self.unsetDisplay and self.dataBuffer is not None:
+            self.display = [True] * len(self.dataBuffer[0])
+            self.unsetDisplay = False
         painter = QPainter(self)
         colors = [Qt.green, Qt.red, Qt.blue, Qt.white, Qt.yellow, Qt.magenta]
-        if self.dataBuffer is not None:
-
+        if self.dataBuffer is not None:    
             n_samps = len(self.dataBuffer)
             n_chans = len(self.dataBuffer[0])
 
@@ -211,19 +220,20 @@ class PaintWidget(QWidget):
             for ch_idx in range(n_chans):
                 painter.setPen(QPen(colors[ch_idx % len(colors)]))
                 chan_offset = (ch_idx + 0.5) * self.channelHeight
-                if self.lastY:
-                    if not math.isnan(self.lastY[ch_idx]) and not math.isnan(self.dataBuffer[0][ch_idx]):
-                        painter.drawLine(x0 - self.px_per_samp,
-                                         -self.lastY[ch_idx] + chan_offset,
-                                         x0,
-                                         -self.dataBuffer[0][ch_idx] + chan_offset)
+                if self.display[ch_idx]:
+                    if self.lastY:
+                        if not math.isnan(self.lastY[ch_idx]) and not math.isnan(self.dataBuffer[0][ch_idx]):
+                            painter.drawLine(x0 - self.px_per_samp,
+                                            -self.lastY[ch_idx] + chan_offset,
+                                            x0,
+                                            -self.dataBuffer[0][ch_idx] + chan_offset)
 
-                for m in range(n_samps - 1):
-                    if not math.isnan(self.dataBuffer[m][ch_idx]) and not math.isnan(self.dataBuffer[m+1][ch_idx]):
-                        painter.drawLine(x0 + m * self.px_per_samp,
-                                         -self.dataBuffer[m][ch_idx] + chan_offset,
-                                         x0 + (m + 1) * self.px_per_samp,
-                                         -self.dataBuffer[m+1][ch_idx] + chan_offset)
+                    for m in range(n_samps - 1):
+                        if not math.isnan(self.dataBuffer[m][ch_idx]) and not math.isnan(self.dataBuffer[m+1][ch_idx]):
+                            painter.drawLine(x0 + m * self.px_per_samp,
+                                            -self.dataBuffer[m][ch_idx] + chan_offset,
+                                            x0 + (m + 1) * self.px_per_samp,
+                                            -self.dataBuffer[m+1][ch_idx] + chan_offset)
 
             # Reset for next iteration
             self.chunk_idx = (self.chunk_idx + 1) % self.dataTr.chunksPerScreen  # For next iteration
