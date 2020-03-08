@@ -11,5 +11,7 @@ python3 -m pip install --upgrade pip
 python3 -m pip install virtualenv
 python3 -m virtualenv -p python3 ~/neuro/
 source ~/neuro/bin/activate
+echo 'alias neuro="source ~/neuro/bin/activate"' >> ~/.bashrc
+source ~/.bashrc
 
 python -m pip install -r requirements.txt
