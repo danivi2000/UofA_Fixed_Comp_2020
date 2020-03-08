@@ -92,7 +92,7 @@ class Ui_sigvisualizer(object):
                 channel_item = QtWidgets.QTreeWidgetItem(item)
                 channel_item.setText(0, 'Channel {}'.format(m+1))
                 channel_item.setCheckState(0, QtCore.Qt.Checked)
-            self.treeWidget.itemClicked.connect(self.yolo)
+            self.treeWidget.itemClicked.connect(self.update_clicked)
 
             item.setExpanded(True if s_ix == default_idx else False)
             self.treeWidget.addTopLevelItem(item)
@@ -104,7 +104,7 @@ class Ui_sigvisualizer(object):
         except IndexError:
             self.show_popup_msg()
     
-    def yolo(self,channel,column):
+    def update_clicked(self,channel,column):
         containingTree = channel.treeWidget()
         # print(channel.checkState(column))
         # print(containingTree.indexFromItem(channel,column).row())
