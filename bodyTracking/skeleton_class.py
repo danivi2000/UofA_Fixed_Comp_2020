@@ -39,7 +39,7 @@ class Skeleton:
 
     def __init__(self):
         self.markers = OrderedDict()
-        self.tracking_treshold = 10
+        self.tracking_threshold = 10
 
     def add_marker(self, marker_position, initpos=[0,0,0]):
         if marker_position not in Skeleton.anatomical_connections:
