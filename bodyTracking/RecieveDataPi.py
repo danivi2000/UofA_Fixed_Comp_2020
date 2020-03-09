@@ -35,10 +35,10 @@ class Stream:
     def __init__(self, camera='stereocam'):
         # first resolve a stereocam stream on the lab network
         print("looking for a stereocam stream...")
-        #self.streams = resolve_stream('type', camera)
+        self.streams = resolve_stream('type', camera)
 
         # create a new inlet to read from the stream
-        #self.inlet = StreamInlet(self.streams[0])
+        self.inlet = StreamInlet(self.streams[0])
         self.centroids = np.zeros((n_markers, n_dimensions))
 
     def stream_data(self):
@@ -73,7 +73,7 @@ def main():
 
     # Create threads
     for i in range(int(n_cameras)):
-        streams.append(Stream('stereocam'+str(i)))
+        streams.append(Stream(camera='stereocam'+str(i)))
         threads.append(threading.Thread(target=streams[i].stream_data, name='t'+str(i)))
 
     # Start all threads
